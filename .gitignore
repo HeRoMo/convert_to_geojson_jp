@@ -1,0 +1,11 @@
+.DS_Store
+
+node_modules
+src_data/*
+
+
+lesson.js
+example
+
+*.geojson
+!geojson/*
