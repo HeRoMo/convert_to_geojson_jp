@@ -5,7 +5,8 @@ src_data/*
 
 
 lesson.js
-example
 
 *.geojson
-!geojson/*
+*.topojson
+!dest/**/*.geojson
+!dest/**/*.topojson

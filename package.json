@@ -6,11 +6,10 @@
   "dependencies": {
     "mapshaper": "^0.3.25"
   },
-  "devDependencies": {
-    "mapshaper": "^0.3.25"
-  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "geojson": "node ./example/geojson.js",
+    "topojson": "node ./example/topojson.js"
   },
   "author": "HeRoMo",
   "license": "ISC"
