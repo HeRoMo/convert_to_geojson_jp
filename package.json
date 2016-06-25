@@ -4,7 +4,8 @@
   "description": "convert shape file to geojson",
   "main": "index.js",
   "dependencies": {
-    "mapshaper": "^0.3.25"
+    "mapshaper": "^0.3.25",
+    "unzip": "^0.1.11"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
