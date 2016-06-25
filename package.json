@@ -1,7 +1,7 @@
 {
-  "name": "mapdata",
+  "name": "convert_to_geojson_jp",
   "version": "1.0.0",
-  "description": "modify mapdata",
+  "description": "convert shape file to geojson",
   "main": "index.js",
   "dependencies": {
     "mapshaper": "^0.3.25"
