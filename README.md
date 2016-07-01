@@ -18,6 +18,10 @@ Original file format of Administrative Zones data is ESRI Shapefile. This script
 ```
 4. generate geojson files in dest/geojson directory.
 
+### Sample page
+You can see the map data localy.
+Command `npm start`, and then access http://localhost:3000
+
 ## Output geojson/topojson files
 
 Coverted data is simplified by [mapshaper](https://github.com/mbloch/mapshaper) to reduce data size.
