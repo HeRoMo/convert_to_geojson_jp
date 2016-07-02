@@ -20,7 +20,7 @@ Original file format of Administrative Zones data is ESRI Shapefile. This script
 
 ### Sample page
 You can see the map data localy.
-Command `npm start`, and then access http://localhost:3000
+Command `npm start`, then your browser open http://localhost:3000.
 
 ## Output geojson/topojson files
 
