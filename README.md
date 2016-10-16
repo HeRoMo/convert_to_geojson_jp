@@ -9,7 +9,7 @@ Original file format of Administrative Zones data is ESRI Shapefile. This script
 ## Usage
 1. Download the data from National Land numerical information website.
   - All Japan data is able to download from [Japanese download page](http://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03.html) only.
-  - Download N03-150101_01_GML.zip by checking "全国" at [Japanese download page](http://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03.html)
+  - Download N03-160101_GML.zip by checking "全国" at [Japanese download page](http://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03.html)
 2. Copy the download file to `src_data` directory.
 3. run the command:
 ```
