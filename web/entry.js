@@ -5,6 +5,7 @@ require("leaflet_marker");
 require("leaflet_marker_2x");
 require("leaflet_marker_shadow");
 require("./main.scss");
+require('./index.html');
 
 const L = require('leaflet')
 const d3 = require('d3');
