@@ -7,7 +7,3 @@ src_data/*
 lesson.js
 
 dest
-*.geojson
-*.topojson
-!dest/**/*.geojson
-!dest/**/*.topojson

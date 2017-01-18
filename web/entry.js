@@ -6,6 +6,9 @@ require("leaflet_marker_2x");
 require("leaflet_marker_shadow");
 require("./main.scss");
 require('./index.html');
+require('japan_detail');
+require('japan');
+require('japan_prefs');
 
 const L = require('leaflet')
 const d3 = require('d3');
@@ -19,7 +22,7 @@ L.tileLayer('http://www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png', {
 .addTo(map);
 map.setView([35.3622222, 138.7313889], 5);
 
-var json_file = './topojson/00_japan.topojson'
+var json_file = './map-data/00_japan.topojson'
 d3.json(json_file,function(japan){
   japan = topojson.feature(japan, japan.objects.japan)
   var option={
