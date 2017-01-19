@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "d3": "^3.5.17",
-    "leaflet": "^0.7.7",
+    "leaflet": "^1.0.2",
     "mapshaper": "^0.3.41",
     "topojson": "^1.6.27",
     "unzip": "^0.1.11"

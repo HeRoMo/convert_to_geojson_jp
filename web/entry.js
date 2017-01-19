@@ -1,18 +1,18 @@
 'use strict'
 
-require("leaflet_css");
-require("leaflet_marker");
-require("leaflet_marker_2x");
-require("leaflet_marker_shadow");
-require("./main.scss");
-require('./index.html');
-require('japan_detail');
-require('japan');
-require('japan_prefs');
+import "leaflet_css";
+import "leaflet_marker";
+import "leaflet_marker_2x";
+import "leaflet_marker_shadow";
+import "./main.scss";
+import './index.html';
+import 'japan_detail';
+import 'japan';
+import 'japan_prefs';
 
-const L = require('leaflet')
-const d3 = require('d3');
-const topojson = require('topojson')
+import L from 'leaflet'
+import * as d3 from 'd3'
+import * as topojson from 'topojson'
 
 const map = L.map('map');
 
@@ -22,37 +22,69 @@ L.tileLayer('http://www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png', {
 .addTo(map);
 map.setView([35.3622222, 138.7313889], 5);
 
-var json_file = './map-data/00_japan.topojson'
-d3.json(json_file,function(japan){
-  japan = topojson.feature(japan, japan.objects.japan)
-  var option={
-    radius: 8,
-    color: "#7dd9f1",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.3,
-    className: "map-area"
+
+const option={
+  radius: 8,
+  color: "#4e4748",
+  weight: 1,
+  opacity: 1,
+  fillOpacity: 0.3,
+  className: "map-area"
+}
+function style(feature){
+  const prop = feature.properties;
+  if(/.+市$/.test(prop.name)){
+    option.fillColor="#3a94ac"
+  } else if(/.+町$/.test(prop.name)){
+    option.fillColor="#f1f07d"
+  } else if(/.+村$/.test(prop.name)){
+    option.fillColor="#a9f17d"
+  } else{
+    option.fillColor="#d41818"
   }
-  function style(feature){
-    var prop = feature.properties;
-    if(/.+市$/.test(prop.name)){
-      option.fillColor="#3a94ac"
-    } else if(/.+町$/.test(prop.name)){
-      option.fillColor="#f1f07d"
-    } else if(/.+村$/.test(prop.name)){
-      option.fillColor="#a9f17d"
-    } else{
-      option.fillColor="#000000"
-    }
-    return option
+  return option
+}
+function onEachFeature(feature, layer) {
+  const prop = feature.properties;
+  if (prop && prop.name) {
+    let name = "["+prop.code6+"] "+prop.pref
+    if(prop.city) name = name + " "+prop.city
+    if(!/.+(都|道|府|県)$/.test(prop.name)) name = name+" "+prop.name
+    layer.bindTooltip(name);
+    layer.on('click', (e)=>{
+      map.fitBounds(e.target.getBounds());
+    })
   }
-  function onEachFeature(feature, layer) {
-    var prop = feature.properties;
-    if (prop && prop.name) {
-        layer.bindPopup("["+prop.code6+"] "+prop.pref+" "+prop.name);
-    }
-    layer.id = prop.code
+  layer.id = prop.code
+}
+
+const japanJson = './map-data/00_japan.topojson'
+const japanDetailJson = './map-data/00_japan_detail.topojson'
+const japanPrefsJson = './map-data/00_japan_prefs.topojson'
+
+function showTopojson(jsonfile, style, onEachFeature, filter){
+  return new Promise((resolve,reject)=>{
+    d3.json(jsonfile,(geoData)=>{
+      resolve(geoData)
+    });
+  }).then((geoData)=>{
+    return new Promise((resolve, reject)=>{
+      // leafletを使ってgeojsonレイヤーを表示する
+      geoData = topojson.feature(geoData, geoData.objects.japan)
+      const geoLayer = L.geoJson(geoData, {style:style, onEachFeature:onEachFeature})
+      resolve(geoLayer)
+    })
+  });
+}
+
+Promise.all([showTopojson(japanJson, style, onEachFeature),
+showTopojson(japanDetailJson, style, onEachFeature),
+showTopojson(japanPrefsJson, style, onEachFeature)]).then((layers)=>{
+  const baseLays={
+    '市区町村':layers[0],
+    '市区町村（行政区）':layers[1],
+    '都道府県':layers[2]
   }
-  // leafletを使ってgeojsonレイヤーを表示する
-  var myLayer = L.geoJson(japan, {style:style, onEachFeature:onEachFeature}).addTo(map);
-});
+  layers[2].addTo(map)
+  L.control.layers(baseLays, null,{collapsed:false}).addTo(map);
+})
