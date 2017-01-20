@@ -14,6 +14,7 @@ module.exports = {
       leaflet_marker: __dirname + "/node_modules/leaflet/dist/images/marker-icon.png",
       leaflet_marker_2x: __dirname + "/node_modules/leaflet/dist/images/marker-icon-2x.png",
       leaflet_marker_shadow: __dirname + "/node_modules/leaflet/dist/images/marker-shadow.png",
+      font_awesome_css: __dirname + "/node_modules/font-awesome/css/font-awesome.css",
       japan: __dirname + "/dest/topojson/00_japan.topojson",
       japan_detail: __dirname + "/dest/topojson/00_japan_detail.topojson",
       japan_prefs: __dirname + "/dest/topojson/00_japan_prefs.topojson"
@@ -26,7 +27,8 @@ module.exports = {
       {test: /\.css?$/, loader: "style-loader!css-loader"},
       {test: /\.(png|jpg)$/, loader: "file-loader?name=images/[name].[ext]"},
       {test: /\.html$/, loader: "file-loader?name=[name].[ext]" },
-      {test: /\.topojson$/, exclude: /node_modules/, loader: "file-loader?name=map-data/[name].[ext]" }
+      {test: /\.topojson$/, exclude: /node_modules/, loader: "file-loader?name=map-data/[name].[ext]" },
+      {test: /\.(woff|woff2|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?name=fonts/[name].[ext]"}
     ]
   },
   devtool: "source-map",

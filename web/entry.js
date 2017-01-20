@@ -1,5 +1,6 @@
 'use strict'
 
+import "font_awesome_css"
 import "leaflet_css";
 import "leaflet_marker";
 import "leaflet_marker_2x";
