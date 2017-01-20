@@ -15,13 +15,28 @@ import L from 'leaflet'
 import * as d3 from 'd3'
 import * as topojson from 'topojson'
 
-const map = L.map('map');
+const homePosition = {center:[35.3622222, 138.7313889], zoom:5}
 
+const map = L.map('map', homePosition);
 L.tileLayer('http://www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png', {
   attribution: "©<a href='http://osm.org/copyright' target='_blank'>OpenStreetMap</a> contributors | 「国土交通省国土政策局「国土数値情報（行政区域データ）」をもとに加工」"
 })
 .addTo(map);
-map.setView([35.3622222, 138.7313889], 5);
+
+const homeCtl = L.control({position: 'topleft'});
+homeCtl.onAdd = function(map) {
+  const div = L.DomUtil.create('div', ' home leaflet-control leaflet-bar')
+  const a = L.DomUtil.create('a')
+  a.addEventListener('click', function(){
+    map.setView(homePosition.center, homePosition.zoom)
+  })
+  a.href = '#'
+  a.title = 'Move to Home position'
+  a.innerHTML = '<i class="fa fa-home" aria-hidden="true"></i>'
+  div.appendChild(a)
+  return div;
+}
+homeCtl.addTo(map);
 
 
 const option={
