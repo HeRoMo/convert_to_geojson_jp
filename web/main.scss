@@ -13,8 +13,23 @@ body{
   min-height: 100%;
 }
 
-// .map-area{
-//   fill: #18c224;
-//   fill-opacity: 0.8;
-//   stroke: #2d5e06;
-// }
+.map-area{
+  stroke: #555555;
+  stroke-width:0.7;
+
+  &.pref {
+    fill: #fc8626;
+  }
+  &.city {
+    fill: #3a94ac;
+  }
+  &.town{
+    fill: #f1f07d;
+  }
+  &.villege {
+    fill: #a9f17d;
+  }
+  &.ward {
+    fill: #d41818;
+  }
+}

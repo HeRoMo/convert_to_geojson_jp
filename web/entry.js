@@ -41,22 +41,23 @@ homeCtl.addTo(map);
 
 const option={
   radius: 8,
-  color: "#4e4748",
+  color: "#676262",
   weight: 1,
   opacity: 1,
-  fillOpacity: 0.3,
-  className: "map-area"
+  fillOpacity: 0.3
 }
 function style(feature){
   const prop = feature.properties;
-  if(/.+市$/.test(prop.name)){
-    option.fillColor="#3a94ac"
+  if(/.+(都|道|府|県)$/.test(prop.name)){
+    option.className='map-area pref'
+  } else if(/.+市$/.test(prop.name)){
+    option.className='map-area city'
   } else if(/.+町$/.test(prop.name)){
-    option.fillColor="#f1f07d"
+    option.className='map-area town'
   } else if(/.+村$/.test(prop.name)){
-    option.fillColor="#a9f17d"
+    option.className='map-area villege'
   } else{
-    option.fillColor="#d41818"
+    option.className='map-area ward'
   }
   return option
 }
@@ -93,14 +94,16 @@ function showTopojson(jsonfile, style, onEachFeature, filter){
   });
 }
 
-Promise.all([showTopojson(japanJson, style, onEachFeature),
-showTopojson(japanDetailJson, style, onEachFeature),
-showTopojson(japanPrefsJson, style, onEachFeature)]).then((layers)=>{
-  const baseLays={
-    '市区町村':layers[0],
-    '市区町村（行政区）':layers[1],
-    '都道府県':layers[2]
-  }
+Promise.all([
+  showTopojson(japanJson, style, onEachFeature),
+  showTopojson(japanDetailJson, style, onEachFeature),
+  showTopojson(japanPrefsJson, style, onEachFeature)])
+  .then((layers)=>{
+    const baseLays={
+      '市区町村':layers[0],
+      '市区町村（行政区）':layers[1],
+      '都道府県':layers[2]
+    }
   layers[2].addTo(map)
   L.control.layers(baseLays, null,{collapsed:false}).addTo(map);
 })
