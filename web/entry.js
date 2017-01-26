@@ -44,7 +44,7 @@ const option={
   color: "#676262",
   weight: 1,
   opacity: 1,
-  fillOpacity: 0.3
+  fillOpacity: 0.5
 }
 function style(feature){
   const prop = feature.properties;
@@ -100,10 +100,24 @@ Promise.all([
   showTopojson(japanPrefsJson, style, onEachFeature)])
   .then((layers)=>{
     const baseLays={
-      '市区町村':layers[0],
-      '市区町村（行政区）':layers[1],
-      '都道府県':layers[2]
+      '都道府県':layers[2],
+      '市町村':layers[0],
+      '市区町村':layers[1]
     }
   layers[2].addTo(map)
   L.control.layers(baseLays, null,{collapsed:false}).addTo(map);
 })
+
+const legend = L.control({position: 'bottomright'});
+legend.onAdd = function(map) {
+  let div = L.DomUtil.create('div', 'legend')
+  let content = '<p>凡例</p>'+
+                '<div class="pref">都道府県</div>'+
+                '<div class="city">市</div>'+
+                '<div class="town">町</div>'+
+                '<div class="villege">村</div>'+
+                '<div class="ward">区</div>'
+  div.innerHTML = content;
+  return div;
+}
+legend.addTo(map);
