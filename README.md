@@ -6,6 +6,8 @@ National Land numerical information Administrative Zones data is distributed by 
 
 Original file format of Administrative Zones data is ESRI Shapefile. This script converts shapefile to geojson/topojson for web uses.
 
+[Sample page](https://HeRoMo.github.io/convert_to_geojson_jp/)
+
 ## Usage
 1. Download the data from National Land numerical information website.
   - All Japan data is able to download from [Japanese download page](http://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03.html) only.
