@@ -13,8 +13,60 @@ body{
   min-height: 100%;
 }
 
-// .map-area{
-//   fill: #18c224;
-//   fill-opacity: 0.8;
-//   stroke: #2d5e06;
-// }
+$color-pref: rgb(106, 198, 227);
+$color-city: rgb(169, 241, 125);
+$color-town: rgb(241, 240, 125);
+$color-villege: rgb(252, 134, 38);
+$color-ward: rgb(212, 24, 24);
+.map-area{
+  stroke: #555555;
+  stroke-width:0.7;
+
+  &.pref {
+    fill: $color-pref;
+  }
+  &.city {
+    fill: $color-city;
+  }
+  &.town{
+    fill: $color-town;
+  }
+  &.villege {
+    fill: $color-villege;
+  }
+  &.ward {
+    fill: $color-ward
+  }
+}
+
+.legend {
+  background-color: rgba(255,255,255,0.8);
+  padding: 10px;
+  border-radius: 5px;
+  p {
+    margin-top: 0;
+    margin-bottom: 2px;
+    font-weight: bold;
+  }
+  div {
+    padding: 0 2px 0 2px;
+    margin-top: 3px;
+    text-align: center;
+    width:100%;
+  }
+  .pref {
+    background-color: rgba(red($color-pref),green($color-pref),blue($color-pref),0.5);
+  }
+  .city {
+    background-color: rgba(red($color-city),green($color-city),blue($color-city),0.5);
+  }
+  .town {
+    background-color: rgba(red($color-town),green($color-town),blue($color-town),0.5);
+  }
+  .villege {
+    background-color: rgba(red($color-villege),green($color-villege),blue($color-villege),0.5);
+  }
+  .ward {
+    background-color: rgba(red($color-ward),green($color-ward),blue($color-ward),0.5);
+  }
+}
