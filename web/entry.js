@@ -38,15 +38,8 @@ homeCtl.onAdd = function(map) {
 }
 homeCtl.addTo(map);
 
-
-const option={
-  radius: 8,
-  color: "#676262",
-  weight: 1,
-  opacity: 1,
-  fillOpacity: 0.5
-}
 function style(feature){
+  const option={}
   const prop = feature.properties;
   if(/.+(都|道|府|県)$/.test(prop.name)){
     option.className='map-area pref'

@@ -21,6 +21,11 @@ $color-ward: rgb(212, 24, 24);
 .map-area{
   stroke: #555555;
   stroke-width:0.7;
+  fill-opacity: 0.5;
+  
+  &:hover{
+    fill-opacity: 0.8;
+  }
 
   &.pref {
     fill: $color-pref;
