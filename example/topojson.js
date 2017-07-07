@@ -1,5 +1,5 @@
 "use strinct"
-const src_file = './src_data/N03-160101_GML.zip'
+const src_file = './src_data/N03-170101_GML.zip'
 var JG = require("../index.js").japan_geojson
 var utils = require("../index.js").utils
 
