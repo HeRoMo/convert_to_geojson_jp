@@ -16,7 +16,6 @@ module.exports = {
         test: /\.js?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        options: { presets: ['es2015'] },
       },
       { test: /\.scss?$/, exclude: /node_modules/, loader: 'style-loader!css-loader!sass-loader' },
       { test: /\.css?$/, loader: 'style-loader!css-loader' },
