@@ -70,35 +70,33 @@ const japanJson = './map-data/00_japan.topojson';
 const japanDetailJson = './map-data/00_japan_detail.topojson';
 const japanPrefsJson = './map-data/00_japan_prefs.topojson';
 
-function showTopojson(jsonfile, styleFunc, onEachFeatureFunc) { // eslint-disable-line no-shadow
-  return new Promise((resolve) => {
-    d3.json(jsonfile, (geoData) => {
-      resolve(geoData);
-    });
-  }).then(geoData => new Promise((resolve) => {
-    // leafletを使ってgeojsonレイヤーを表示する
-    const japanGeoData = topojson.feature(geoData, geoData.objects.japan);
-    const geoLayer = L.geoJson(
-      japanGeoData,
-      { style: styleFunc, onEachFeature: onEachFeatureFunc },
-    );
-    resolve(geoLayer);
-  }));
+async function showTopojson(jsonfile, styleFunc, onEachFeatureFunc) { // eslint-disable-line no-shadow, max-len
+  const geoData = await d3.json(jsonfile);
+
+  // leafletを使ってgeojsonレイヤーを表示する
+  const japanGeoData = topojson.feature(geoData, geoData.objects.japan);
+  const geoLayer = L.geoJson(
+    japanGeoData,
+    { style: styleFunc, onEachFeature: onEachFeatureFunc },
+  );
+  return geoLayer;
 }
 
-Promise.all([
-  showTopojson(japanJson, style, onEachFeature),
-  showTopojson(japanDetailJson, style, onEachFeature),
-  showTopojson(japanPrefsJson, style, onEachFeature)])
-  .then((layers) => {
-    const baseLays = {
-      都道府県: layers[2],
-      市町村: layers[0],
-      市区町村: layers[1],
-    };
-    layers[2].addTo(map);
-    L.control.layers(baseLays, null, { collapsed: false }).addTo(map);
-  });
+async function drawMap() {
+  const layers = await Promise.all([
+    showTopojson(japanJson, style, onEachFeature),
+    showTopojson(japanDetailJson, style, onEachFeature),
+    showTopojson(japanPrefsJson, style, onEachFeature),
+  ]);
+  const baseLays = {
+    都道府県: layers[2],
+    市町村: layers[0],
+    市区町村: layers[1],
+  };
+  layers[2].addTo(map);
+  L.control.layers(baseLays, null, { collapsed: false }).addTo(map);
+}
+drawMap();
 
 const legend = L.control({ position: 'bottomright' });
 legend.onAdd = () => {
