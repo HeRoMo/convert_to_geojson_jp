@@ -1,12 +1,17 @@
-"use strict"
-const src_file = './src_data/N03-160101_GML.zip'
-var JG = require("../index.js").japan_geojson
-var utils = require("../index.js").utils
+const srcFile = './src_data/N03-160101_GML.zip';
+const JG = require('../index.js').japanGeojson;
+const { utils } = require('../index.js');
 
-utils.unzip(src_file)
-.then(function(shp_file){
-    JG.japanDetailGeojson(shp_file)
-    JG.japanGeojson(shp_file)
-    JG.japanAllPrefsGeojson(shp_file)
-})
-JG.japanPrefsGeojson('./dest/geojson/00_japan.geojson', 'geojson')
+async function convertToGeojson() {
+  const shpFile = await utils.unzip(srcFile);
+  await Promise.all([
+    JG.japanDetailGeojson(shpFile),
+    JG.japanGeojson(shpFile),
+    JG.japanAllPrefsGeojson(shpFile),
+  ]);
+  JG.japanPrefsGeojson('./dest/geojson/00_japan.geojson', 'geojson');
+}
+
+module.exports = convertToGeojson;
+
+if (require.main === module) convertToGeojson();
