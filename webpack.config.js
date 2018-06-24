@@ -1,4 +1,5 @@
 module.exports = {
+  mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
   context: `${__dirname}/web`,
   entry: {
     javascript: './entry.js',
@@ -26,9 +27,15 @@ module.exports = {
     ],
   },
   devtool: 'source-map',
-  devServer: {
-    contentBase: `${__dirname}/docs`,
+  serve: {
+    content: `${__dirname}/docs`,
     compress: true,
-    port: 3000,
+    host: 'localhost',
+    port: 9000,
+    open: true,
+    hot: {
+      host: 'localhost',
+      port: 9010,
+    },
   },
 };
