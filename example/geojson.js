@@ -12,4 +12,6 @@ async function convertToGeojson() {
   JG.japanPrefsGeojson('./dest/geojson/00_japan.geojson', 'geojson');
 }
 
-convertToGeojson();
+module.exports = convertToGeojson;
+
+if (require.main === module) convertToGeojson();
