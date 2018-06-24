@@ -1,13 +1,6 @@
 import 'font-awesome/css/font-awesome.css';
 import 'leaflet/dist/leaflet.css';
-import 'leaflet/dist/images/marker-icon.png';
-import 'leaflet/dist/images/marker-icon-2x.png';
-import 'leaflet/dist/images/marker-shadow.png';
 import './main.scss';
-import './index.html';
-import '../dest/topojson/00_japan_detail.topojson';
-import '../dest/topojson/00_japan.topojson';
-import '../dest/topojson/00_japan_prefs.topojson';
 
 import L from 'leaflet';
 import * as d3 from 'd3';
