@@ -39,5 +39,6 @@
     "webpack": "^4.12.1",
     "webpack-cli": "^3.0.8",
     "webpack-serve": "^1.0.4"
-  }
+  },
+  "repository": "https://github.com/HeRoMo/convert_to_geojson_jp"
 }
