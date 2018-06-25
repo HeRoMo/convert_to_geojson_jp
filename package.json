@@ -15,7 +15,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "geojson": "node ./example/geojson.js",
     "topojson": "node ./example/topojson.js",
-    "start": "./node_modules/.bin/webpack-serve --config ./webpack.config.js"
+    "start": "./node_modules/.bin/webpack-serve --config ./webpack.config.js",
+    "web-build": "./node_modules/.bin/webpack --mode production"
   },
   "author": "HeRoMo",
   "license": "ISC",
@@ -38,5 +39,6 @@
     "webpack": "^4.12.1",
     "webpack-cli": "^3.0.8",
     "webpack-serve": "^1.0.4"
-  }
+  },
+  "repository": "https://github.com/HeRoMo/convert_to_geojson_jp"
 }
