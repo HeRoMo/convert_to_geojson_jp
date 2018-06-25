@@ -1,15 +1,17 @@
-"use strinct"
-const src_file = './src_data/N03-170101_GML.zip'
-var JG = require("../index.js").japan_geojson
-var utils = require("../index.js").utils
+const JG = require('../index.js').japanGeojson;
+const convertToGeojson = require('./geojson');
 
-utils.unzip(src_file)
-.then(function(shp_file){
-    JG.japanDetailGeojson(shp_file)
-    JG.japanGeojson(shp_file)
-    JG.japanAllPrefsGeojson(shp_file)
-})
-JG.geo2topo('dest/geojson/00_japan_detail.geojson','dest/topojson/00_japan_detail.topojson')
-JG.geo2topo('dest/geojson/00_japan_prefs.geojson','dest/topojson/00_japan_prefs.topojson')
-JG.geo2topo('dest/geojson/00_japan.geojson','dest/topojson/00_japan.topojson')
-JG.japanPrefsGeojson('dest/geojson/00_japan.geojson', 'topojson')
+const srcFile = './src_data/N03-180101_GML.zip';
+(async () => {
+  try {
+    await convertToGeojson(srcFile);
+  } catch (error) {
+    console.error(error);
+  }
+  Promise.all([
+    JG.geo2topo('dest/geojson/00_japan_detail.geojson', 'dest/topojson/00_japan_detail.topojson'),
+    JG.geo2topo('dest/geojson/00_japan_prefs.geojson', 'dest/topojson/00_japan_prefs.topojson'),
+    JG.geo2topo('dest/geojson/00_japan.geojson', 'dest/topojson/00_japan.topojson'),
+    JG.japanPrefsGeojson('dest/geojson/00_japan.geojson', 'topojson'),
+  ]);
+})();

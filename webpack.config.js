@@ -1,40 +1,66 @@
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 module.exports = {
-  context: __dirname + '/web',
+  mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
+  context: `${__dirname}/web`,
   entry: {
-    javascript: "./entry.js"
+    bundle: './entry.js',
   },
   output: {
-      path: __dirname + "/docs",
-      filename: "bundle.js"
+    path: `${__dirname}/docs`,
+    filename: '[name].js',
   },
   resolve: {
     extensions: ['.html', '.js', '.json', '.scss', '.css'],
-    alias: {
-      leaflet_css: __dirname + "/node_modules/leaflet/dist/leaflet.css",
-      leaflet_marker: __dirname + "/node_modules/leaflet/dist/images/marker-icon.png",
-      leaflet_marker_2x: __dirname + "/node_modules/leaflet/dist/images/marker-icon-2x.png",
-      leaflet_marker_shadow: __dirname + "/node_modules/leaflet/dist/images/marker-shadow.png",
-      font_awesome_css: __dirname + "/node_modules/font-awesome/css/font-awesome.css",
-      japan: __dirname + "/dest/topojson/00_japan.topojson",
-      japan_detail: __dirname + "/dest/topojson/00_japan_detail.topojson",
-      japan_prefs: __dirname + "/dest/topojson/00_japan_prefs.topojson"
-    }
   },
   module: {
     rules: [
-      {test: /\.js?$/, exclude: /node_modules/, loader: "babel-loader", options: { presets: ["es2015"] }},
-      {test: /\.scss?$/, exclude: /node_modules/, loader: "style-loader!css-loader!sass-loader"},
-      {test: /\.css?$/, loader: "style-loader!css-loader"},
-      {test: /\.(png|jpg)$/, loader: "file-loader?name=images/[name].[ext]"},
-      {test: /\.html$/, loader: "file-loader?name=[name].[ext]" },
-      {test: /\.topojson$/, exclude: /node_modules/, loader: "file-loader?name=map-data/[name].[ext]" },
-      {test: /\.(woff|woff2|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?name=fonts/[name].[ext]"}
-    ]
+      {
+        test: /\.js?$/,
+        exclude: /node_modules/,
+        use: 'babel-loader',
+      },
+      {
+        test: /\.(scss|css)?$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+      { test: /\.(png|jpg)$/, use: 'file-loader?name=images/[name].[ext]' },
+      { test: /\.html$/, use: 'html-loader' },
+      { test: /\.(woff|woff2|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/, use: 'file-loader?name=fonts/[name].[ext]' },
+    ],
   },
-  devtool: "source-map",
-  devServer: {
-    contentBase: __dirname + '/docs',
+  devtool: 'source-map',
+  optimization: {
+    splitChunks: {
+      name: 'vendor',
+      chunks: 'initial',
+    },
+  },
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: 'dest/topojson/00_japan_detail.topojson', to: 'map-data/', context: '../' },
+      { from: 'dest/topojson/00_japan.topojson', to: 'map-data/', context: '../' },
+      { from: 'dest/topojson/00_japan_prefs.topojson', to: 'map-data/', context: '../' },
+    ]),
+    new HtmlWebpackPlugin({
+      template: 'index.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      // chunkFilename: '[name].css',
+    }),
+  ],
+  serve: {
+    content: `${__dirname}/docs`,
     compress: true,
-    port: 3000
-  }
+    host: 'localhost',
+    port: 9000,
+    open: true,
+    hot: {
+      host: 'localhost',
+      port: 9010,
+    },
+  },
 };
