@@ -1,9 +1,8 @@
-const srcFile = './src_data/N03-160101_GML.zip';
 const JG = require('../index.js').japanGeojson;
 const { utils } = require('../index.js');
 
-async function convertToGeojson() {
-  const shpFile = await utils.unzip(srcFile);
+async function convertToGeojson(srcArchive) {
+  const shpFile = await utils.unzip(srcArchive);
   await Promise.all([
     JG.japanDetailGeojson(shpFile),
     JG.japanGeojson(shpFile),
@@ -14,4 +13,7 @@ async function convertToGeojson() {
 
 module.exports = convertToGeojson;
 
-if (require.main === module) convertToGeojson();
+if (require.main === module) {
+  const srcFile = './src_data/N03-180101_GML.zip';
+  convertToGeojson(srcFile);
+}
