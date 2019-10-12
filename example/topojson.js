@@ -1,7 +1,7 @@
 const JG = require('../index.js').japanGeojson;
 const convertToGeojson = require('./geojson');
 
-const srcFile = './src_data/N03-180101_GML.zip';
+const srcFile = './src_data/N03-190101_GML.zip';
 (async () => {
   try {
     await convertToGeojson(srcFile);

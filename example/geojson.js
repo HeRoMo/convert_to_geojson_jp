@@ -14,6 +14,6 @@ async function convertToGeojson(srcArchive) {
 module.exports = convertToGeojson;
 
 if (require.main === module) {
-  const srcFile = './src_data/N03-180101_GML.zip';
+  const srcFile = './src_data/N03-190101_GML.zip';
   convertToGeojson(srcFile);
 }
