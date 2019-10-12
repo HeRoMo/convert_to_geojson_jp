@@ -1,6 +1,7 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
 
 module.exports = {
   mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
@@ -52,15 +53,12 @@ module.exports = {
       // chunkFilename: '[name].css',
     }),
   ],
-  serve: {
-    content: `${__dirname}/docs`,
+  devServer: {
+    contentBase: path.join(__dirname, 'docs'),
     compress: true,
-    host: 'localhost',
+    host: '0.0.0.0',
     port: 9000,
     open: true,
-    hot: {
-      host: 'localhost',
-      port: 9010,
-    },
+    hot: true,
   },
 };

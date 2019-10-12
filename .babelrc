@@ -1,12 +1,11 @@
 {
   "presets": [
-    ["env", {
-      "targets": {
-        "browsers": ["last 2 versions", "safari >= 7"]
-      },
-      "modules": false,
-      "useBuiltIns": true,
-      "exclude": ["transform-regenerator"]
+    ["@babel/preset-env", {
+      // "forceAllTransforms": true,
+      "useBuiltIns": "usage",
+      "corejs": 3,
+      "modules": false
+      // "exclude": ["transform-typeof-symbol"]
     }]
   ]
 }
