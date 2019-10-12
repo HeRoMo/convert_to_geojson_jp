@@ -1,6 +1,6 @@
 {
   "name": "convert_to_geojson_jp",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "convert shape file to geojson",
   "main": "index.js",
   "dependencies": {
