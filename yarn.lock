@@ -3645,10 +3645,10 @@ make-dir@^3.0.2, make-dir@^3.1.0:
   dependencies:
     semver "^6.0.0"
 
-mapshaper@^0.5.117:
-  version "0.5.117"
-  resolved "https://registry.yarnpkg.com/mapshaper/-/mapshaper-0.5.117.tgz#c6b2c1f19a7d99c3f425b50b986236fbc45d7f7f"
-  integrity sha512-udNJayirkehSAL4PzLe8HAeKmeufnHV3+hJhvLr7ZAFtqjK2BCQfvwixOWVNJw+tC7QYgWPOzaP6LzhXVJf5Gg==
+mapshaper@^0.5.118:
+  version "0.5.118"
+  resolved "https://registry.yarnpkg.com/mapshaper/-/mapshaper-0.5.118.tgz#380b9240d0ca05e9bf133652a942158e8e64eea1"
+  integrity sha512-qNHHLK3pyUK3r9KCQ4aGWao1p3R6LhdnDFY9XvgKquw5ml/n1498bekxgaUkD1bkDimaitodobWwg4JW7Uu6LA==
   dependencies:
     "@tmcw/togeojson" "^4.7.0"
     "@xmldom/xmldom" "^0.8.2"
