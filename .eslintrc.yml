@@ -2,6 +2,7 @@ extends: airbnb-base
 
 env:
   browser: true
-
+ignorePatterns:
+  - docs
 rules:
   no-console: ["error", { allow: ["info", "warn", "error"] }]

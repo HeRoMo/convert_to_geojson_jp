@@ -40,11 +40,13 @@ module.exports = {
     },
   },
   plugins: [
-    new CopyWebpackPlugin([
-      { from: 'dest/topojson/00_japan_detail.topojson', to: 'map-data/', context: '../' },
-      { from: 'dest/topojson/00_japan.topojson', to: 'map-data/', context: '../' },
-      { from: 'dest/topojson/00_japan_prefs.topojson', to: 'map-data/', context: '../' },
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'dest/topojson/00_japan_detail.topojson', to: 'map-data/', context: '../' },
+        { from: 'dest/topojson/00_japan.topojson', to: 'map-data/', context: '../' },
+        { from: 'dest/topojson/00_japan_prefs.topojson', to: 'map-data/', context: '../' },
+      ],
+    }),
     new HtmlWebpackPlugin({
       template: 'index.html',
     }),
@@ -54,7 +56,9 @@ module.exports = {
     }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'docs'),
+    static: {
+      directory: path.join(__dirname, 'docs'),
+    },
     compress: true,
     host: '0.0.0.0',
     port: 9000,

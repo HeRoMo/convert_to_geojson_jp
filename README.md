@@ -2,7 +2,9 @@
 
 This script converts the shapefile of National Land numerical information Administrative Zones data to Geojson/Topojson files.
 
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma-->
 National Land numerical information Administrative Zones data is distributed by National Land Information Division, National Spatial Planning and Regional Policy Bureau, MLIT of Japan. This data contains prefectural name, branch name, county/government ordinance city name, municipality name, administrative code, etc. for nation-wide administrative boundaries.
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma -->
 
 Original file format of Administrative Zones data is ESRI Shapefile. This script converts shapefile to geojson/topojson for web uses.
 
@@ -10,8 +12,8 @@ Original file format of Administrative Zones data is ESRI Shapefile. This script
 
 ## Usage
 1. Download the data from National Land numerical information website.
-  - All Japan data is able to download from [Japanese download page](http://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03.html) only.
-  - Download N03-190101_GML.zip by checking "全国" at [Japanese download page](http://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03.html)
+  - All Japan data is able to download from [Japanese download page](https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-v3_0.html#prefecture00) only.
+  - Download N03-190101_GML.zip by checking "全国" at [Japanese download page](https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-v3_0.html#prefecture00)
 2. Copy the download file to `src_data` directory.
 3. run the command:
 ```
@@ -41,4 +43,4 @@ Every feature of geojson/topojson data has the following properties.
 
 ## License
 The license of this script is ISC.
-But you have to follow the [terms of use for National Land numerical information](http://nlftp.mlit.go.jp/ksj-e/other/yakkan.html) about converted data.
+But you have to follow the [terms of use for National Land numerical information](https://nlftp.mlit.go.jp/ksj/other/agreement.html) about converted data.

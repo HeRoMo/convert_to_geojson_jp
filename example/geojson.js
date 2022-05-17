@@ -1,5 +1,5 @@
-const JG = require('../index.js').japanGeojson;
-const { utils } = require('../index.js');
+const JG = require('../index').japanGeojson;
+const { utils } = require('../index');
 
 async function convertToGeojson(srcArchive) {
   const shpFile = await utils.unzip(srcArchive);
