@@ -1,4 +1,4 @@
-const JG = require('../index.js').japanGeojson;
+const JG = require('../index').japanGeojson;
 const convertToGeojson = require('./geojson');
 
 const srcFile = './src_data/N03-190101_GML.zip';
