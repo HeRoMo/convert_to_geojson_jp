@@ -1,4 +1,6 @@
-import 'font-awesome/css/font-awesome.css';
+import { icon } from '@fortawesome/fontawesome-svg-core';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
+
 import 'leaflet/dist/leaflet.css';
 import './main.scss';
 
@@ -6,13 +8,13 @@ import L from 'leaflet';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
 
+const faHouseIcon = icon(faHouse);
 const homePosition = { center: [35.3622222, 138.7313889], zoom: 5 };
 
 const map = L.map('map', homePosition);
 L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png', {
-  attribution: "©<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>国土地理院</a> | [「国土数値情報（行政区域データ）」（国土交通省）](https://nlftp.mlit.go.jp/ksj/other/agreement.html)をもとに加工",
-})
-  .addTo(map);
+  attribution: "©<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>国土地理院</a> | <a href='https://nlftp.mlit.go.jp/ksj/other/agreement.html'>「国土数値情報（行政区域データ）」</a>（国土交通省）をもとに加工",
+}).addTo(map);
 
 const homeCtl = L.control({ position: 'topleft' });
 homeCtl.onAdd = (mapData) => {
@@ -23,7 +25,7 @@ homeCtl.onAdd = (mapData) => {
   });
   a.href = '#';
   a.title = 'Move to Home position';
-  a.innerHTML = '<i class="fa fa-home" aria-hidden="true"></i>';
+  a.appendChild(faHouseIcon.node[0]);
   div.appendChild(a);
   return div;
 };
