@@ -16,4 +16,5 @@ ignorePatterns:
   - docs
 rules:
   no-console: ["error", { allow: ["info", "warn", "error"] }]
+  import/extensions: [error, ignorePackages, { ts: never, js: never }]
   import/prefer-default-export: off
