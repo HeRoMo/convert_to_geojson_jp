@@ -1,4 +1,5 @@
 import { rm, readFile } from 'fs/promises';
+import { dirname } from 'path';
 
 import { prepareFixtureShapefile } from '../setup';
 import { unzip } from '../../lib/utils';
@@ -11,7 +12,7 @@ import {
   japanPrefsGeojson,
 } from '../../lib/convert_to_geojson_jp';
 
-let dest: { dir: string, file: string };
+let fixturePath: string;
 
 async function loadJson(path: string) {
   const file = await readFile(path, 'utf-8');
@@ -20,16 +21,16 @@ async function loadJson(path: string) {
 }
 
 beforeAll(async () => {
-  dest = await prepareFixtureShapefile();
+  fixturePath = await prepareFixtureShapefile();
 });
 
 afterAll(async () => {
-  await rm(dest.dir, { recursive: true, force: true });
+  await rm(dirname(fixturePath), { recursive: true, force: true });
 });
 
 let shpFile: any;
 beforeEach(async () => {
-  shpFile = await unzip(dest.file);
+  shpFile = await unzip(fixturePath);
 });
 
 describe('japanGeojson', () => {
@@ -70,7 +71,7 @@ describe('japanPrefsGeojson', () => {
   test('Snapshot Test', async () => {
     const outputDir = './dest/geojson';
     const inputGeoJson = `${outputDir}/00_japan.geojson`;
-    japanPrefsGeojson(inputGeoJson, 'geojson');
+    await japanPrefsGeojson(inputGeoJson, 'geojson');
     const path = `${outputDir}/14_kanagawa.geojson`;
     const geojson = await loadJson(path);
     expect(geojson).toMatchSnapshot();

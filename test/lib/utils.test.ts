@@ -1,4 +1,5 @@
 import { rm } from 'fs/promises';
+import { dirname } from 'path';
 
 import { code5to6, unzip } from '../../lib/utils';
 import { prepareFixtureShapefile } from '../setup';
@@ -12,17 +13,17 @@ describe('#code5to6', () => {
 });
 
 describe('#unzip', () => {
-  let dest: { dir: string, file: string };
+  let fixturePath: string;
   beforeAll(async () => {
-    dest = await prepareFixtureShapefile();
+    fixturePath = await prepareFixtureShapefile();
   });
 
   afterAll(async () => {
-    await rm(dest.dir, { recursive: true, force: true });
+    await rm(dirname(fixturePath), { recursive: true, force: true });
   });
 
   test('successfull', async () => {
-    const shpFile = await unzip(dest.file);
+    const shpFile = await unzip(fixturePath);
 
     expect(shpFile).toMatch(/N03-21_14_210101.shp$/);
   });

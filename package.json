@@ -17,6 +17,7 @@
   "scripts": {
     "lint": "eslint . --ext .js,.ts",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "geojson": "node ./example/geojson.js",
     "topojson": "node ./example/topojson.js",
     "start": "./node_modules/.bin/webpack-dev-server --config ./webpack.config.js",

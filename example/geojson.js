@@ -8,7 +8,7 @@ async function convertToGeojson(srcArchive) {
     JG.japanGeojson(shpFile),
     JG.japanAllPrefsGeojson(shpFile),
   ]);
-  JG.japanPrefsGeojson('./dest/geojson/00_japan.geojson', 'geojson');
+  await JG.japanPrefsGeojson('./dest/geojson/00_japan.geojson', 'geojson');
 }
 
 module.exports = convertToGeojson;

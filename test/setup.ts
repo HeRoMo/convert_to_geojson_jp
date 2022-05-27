@@ -46,15 +46,16 @@ export function download(srcUrl: string, outputPath: string): Promise<string> {
   });
 }
 
-const tmpDir = path.resolve(__dirname, './tmp');
+const tmpBaseDir = path.resolve(__dirname, './tmp');
 
-export async function prepareFixtureShapefile(): Promise<{dir: string, file: string}> {
-  if (!existsSync(tmpDir)) await mkdir(tmpDir);
-  const destFile = String(Math.floor(Math.random() * new Date().getTime()));
-  const destPath = path.resolve(tmpDir, destFile);
+export async function prepareFixtureShapefile(): Promise<string> {
+  const tmpDestDir = String(Math.floor(Math.random() * new Date().getTime()));
+  const tmpDir = path.resolve(tmpBaseDir, tmpDestDir);
+  if (!existsSync(tmpDir)) await mkdir(tmpDir, { recursive: true });
+  const destPath = path.resolve(tmpDir, fileName);
   await copyFile(shapeFile, destPath);
 
-  return { dir: destDir, file: destPath };
+  return destPath;
 }
 
 export default async () => {
