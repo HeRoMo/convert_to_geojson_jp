@@ -1,8 +1,43 @@
-import * as path from 'path';
 import * as fs from 'fs';
+import { rename, unlink } from 'fs/promises';
+import * as https from 'https';
+import * as path from 'path';
 import * as unzip from 'unzipper';
+import { tmpdir } from 'os';
 
 export default function Utils() {}
+
+/**
+ * ファイルをダウンロードする
+ *
+ * @param srcUrl ダウンロード URL
+ * @param outputPath 保存先パス
+ * @returns 保存先パス
+ */
+Utils.download = (srcUrl: string, outputPath: string): Promise<string> => {
+  const destPath = outputPath;
+  const tmpDest = path.resolve(tmpdir(), `tmp_${new Date().getTime()}`);
+  const destStream = fs.createWriteStream(tmpDest);
+  return new Promise((resolve, reject) => {
+    https.get(srcUrl, (response) => {
+      response.pipe(destStream);
+      response.on('end', async () => {
+        destStream.close();
+        if (response.complete) {
+          await rename(tmpDest, destPath);
+          resolve(destPath);
+        } else {
+          await unlink(tmpDest);
+          reject(response.statusCode);
+        }
+      });
+      response.on('error', async (err) => {
+        await unlink(tmpDest);
+        reject(err);
+      });
+    });
+  });
+};
 
 /**
  * 5桁自治体コードを6桁コードに変換する
@@ -28,13 +63,10 @@ Utils.unzip = (zipfile: string): Promise<string> => {
   let shpFile = `${outputDir}/`;
   return new Promise((resolve) => {
     fs.createReadStream(zipfile)
-      .on('end', () => {
-        resolve(shpFile);
-      })
+      .on('end', () => resolve(shpFile))
       .pipe(unzip.Parse())
       .on('entry', (entry) => {
-        const fileName = entry.path;
-        const { type } = entry; // 'Directory' or 'File'
+        const { path: fileName, type } = entry; // type is 'Directory' or 'File'
         if (type === 'File') {
           const dirname = path.dirname(fileName);
           if (dirname !== '.') {

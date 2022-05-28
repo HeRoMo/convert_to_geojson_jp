@@ -24,7 +24,7 @@ describe('#unzip', () => {
 
   test('successfull', async () => {
     const shpFile = await utils.unzip(fixturePath);
-
-    expect(shpFile).toMatch(/N03-21_14_210101.shp$/);
+    const expectedDir = dirname(fixturePath);
+    expect(shpFile).toMatch(`${expectedDir}/N03-20210101_14_GML\\N03-21_14_210101.shp`);
   });
 });
