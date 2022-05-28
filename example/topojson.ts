@@ -1,5 +1,5 @@
-const JG = require('../index').japanGeojson;
-const convertToGeojson = require('./geojson');
+import { japanGeojson as JG } from '../lib';
+import { convertToGeojson } from './geojson';
 
 const srcFile = './src_data/N03-190101_GML.zip';
 (async () => {
@@ -8,7 +8,7 @@ const srcFile = './src_data/N03-190101_GML.zip';
   } catch (error) {
     console.error(error);
   }
-  Promise.all([
+  await Promise.all([
     JG.geo2topo('dest/geojson/00_japan_detail.geojson', 'dest/topojson/00_japan_detail.topojson'),
     JG.geo2topo('dest/geojson/00_japan_prefs.geojson', 'dest/topojson/00_japan_prefs.topojson'),
     JG.geo2topo('dest/geojson/00_japan.geojson', 'dest/topojson/00_japan.topojson'),

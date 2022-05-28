@@ -1,16 +1,16 @@
-const path = require('path');
-const fs = require('fs');
-const unzip = require('unzipper');
+import * as path from 'path';
+import * as fs from 'fs';
+import * as unzip from 'unzipper';
 
-function Utils() {}
+export default function Utils() {}
 
 /**
  * 5桁自治体コードを6桁コードに変換する
- * @param  [String] code5 5桁の自治体コード
- * @return [String]       6桁の自治体コード
+ * @param  code5 5桁の自治体コード
+ * @return 6桁の自治体コード
  */
-Utils.code5to6 = (code5) => {
-  const code5str = code5.toString(10);
+Utils.code5to6 = (code5: string) => {
+  const code5str = code5.toString();
   const code5array = code5str.split('');
   const digit = code5array.length + 1;
   const sum = code5array.reduce((pre, cur, i) => (pre + parseInt(cur, 10) * (digit - i)), 0);
@@ -20,10 +20,10 @@ Utils.code5to6 = (code5) => {
 
 /**
  * データ・ソースアーカイブを解凍する
- * @param  [Stirng] zipfile 解凍するzipファイル
- * @return [Promise] shape ファイルのファイルパスを引数に渡したPromise
+ * @param zipfile 解凍するzipファイル
+ * @return shape ファイルのファイルパスを引数に渡したPromise
  */
-Utils.unzip = (zipfile) => {
+Utils.unzip = (zipfile: string): Promise<string> => {
   const outputDir = path.dirname(zipfile);
   let shpFile = `${outputDir}/`;
   return new Promise((resolve) => {
@@ -55,7 +55,7 @@ Utils.unzip = (zipfile) => {
   });
 };
 
-Utils.prefs = {
+const prefs : {[prefName: string]: string} = {
   '01_hokkaido': '北海道',
   '02_aomori': '青森県',
   '03_iwate': '岩手県',
@@ -105,4 +105,4 @@ Utils.prefs = {
   '47_okinawa': '沖縄県',
 };
 
-module.exports = Utils;
+Utils.prefs = prefs;

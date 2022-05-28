@@ -1,7 +1,6 @@
-const JG = require('../index').japanGeojson;
-const { utils } = require('../index');
+import { japanGeojson as JG, utils } from '../lib'; // eslint-disable-line import/no-import-module-exports
 
-async function convertToGeojson(srcArchive) {
+export async function convertToGeojson(srcArchive: string) {
   const shpFile = await utils.unzip(srcArchive);
   await Promise.all([
     JG.japanDetailGeojson(shpFile),
@@ -10,8 +9,6 @@ async function convertToGeojson(srcArchive) {
   ]);
   await JG.japanPrefsGeojson('./dest/geojson/00_japan.geojson', 'geojson');
 }
-
-module.exports = convertToGeojson;
 
 if (require.main === module) {
   const srcFile = './src_data/N03-190101_GML.zip';

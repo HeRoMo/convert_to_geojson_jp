@@ -20,7 +20,7 @@ afterAll(async () => {
   await rm(dirname(fixturePath), { recursive: true, force: true });
 });
 
-let shpFile: any;
+let shpFile: string;
 beforeEach(async () => {
   shpFile = await utils.unzip(fixturePath);
 });
