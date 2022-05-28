@@ -15,7 +15,7 @@ Utils.code5to6 = (code5: string) => {
   const digit = code5array.length + 1;
   const sum = code5array.reduce((pre, cur, i) => (pre + parseInt(cur, 10) * (digit - i)), 0);
   const check = (11 - (sum % 11)) % 10;
-  return (`000000${code5str}${check}`).substr(-6);
+  return (`000000${code5str}${check}`).slice(-6);
 };
 
 /**

@@ -210,7 +210,7 @@ async function japanAllPrefsGeojson(shpFile: string) {
   features.forEach((feature: JpFeature) => {
     const d = feature.properties;
     /* eslint-disable no-param-reassign */
-    d.code5 = `${d.code5.substr(0, 2)}000`;
+    d.code5 = `${d.code5.slice(0, 2)}000`;
     d.code6 = Utils.code5to6(d.code5);
     d.name = d.pref;
     /* eslint-enable no-param-reassign */
