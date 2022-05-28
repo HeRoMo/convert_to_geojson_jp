@@ -1,11 +1,11 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "target": "es2020",
     "module": "commonjs",
     "lib": ["es2020"],
     "declaration": true,
     "strict": true,
-    "noImplicitAny": false, // TODO: remove
     "useUnknownInCatchVariables": false, // TODO: remove
     "strictNullChecks": true,
     "noImplicitThis": true,
@@ -19,8 +19,10 @@
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
     "typeRoots": [
-      "./node_modules/@types"
-    ]
+      "./node_modules/@types",
+      "./types"
+    ],
+    "paths": {"mapshaper": ["./types/mapshaper"]}
   },
   "exclude": [
     "node_modules"
