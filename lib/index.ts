@@ -1,4 +1,4 @@
-import japanGeojson from './convert_to_geojson_jp';
+import { JpShapeConverter } from './convert_to_geojson_jp';
 import utils from './utils';
 
-export { japanGeojson, utils };
+export { JpShapeConverter, utils };

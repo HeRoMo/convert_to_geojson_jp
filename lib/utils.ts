@@ -1,11 +1,20 @@
 import * as fs from 'fs';
-import { rename, unlink } from 'fs/promises';
+import { mkdir, rename, unlink } from 'fs/promises';
 import * as https from 'https';
 import * as path from 'path';
 import * as unzip from 'unzipper';
-import { tmpdir } from 'os';
+import { cursorTo } from 'readline';
 
 export default function Utils() {}
+
+/**
+ * 指定したパスのディレクトリを用意する。なければ作る。
+ *
+ * @param dirPath ディレクトリのパス
+ */
+Utils.prepareDir = async (dirPath: string): Promise<void> => {
+  if (!fs.existsSync(dirPath)) await mkdir(dirPath, { recursive: true });
+};
 
 /**
  * ファイルをダウンロードする
@@ -14,22 +23,35 @@ export default function Utils() {}
  * @param outputPath 保存先パス
  * @returns 保存先パス
  */
-Utils.download = (srcUrl: string, outputPath: string): Promise<string> => {
-  const destPath = outputPath;
-  const tmpDest = path.resolve(tmpdir(), `tmp_${new Date().getTime()}`);
+Utils.download = async (srcUrl: string, outputPath: string): Promise<string> => {
+  if (fs.existsSync(outputPath)) return outputPath;
+  const outputDir = path.dirname(outputPath);
+  await Utils.prepareDir(outputDir);
+
+  const destDir = path.dirname(outputPath);
+  const tmpDest = path.resolve(destDir, `download_${new Date().getTime()}.tmp`);
   const destStream = fs.createWriteStream(tmpDest);
+  let downloadedSize = 0;
   return new Promise((resolve, reject) => {
     https.get(srcUrl, (response) => {
       response.pipe(destStream);
-      response.on('end', async () => {
+      response.on('close', async () => {
         destStream.close();
+        process.stdout.write('\n');
         if (response.complete) {
-          await rename(tmpDest, destPath);
-          resolve(destPath);
+          await rename(tmpDest, outputPath);
+          resolve(outputPath);
         } else {
           await unlink(tmpDest);
           reject(response.statusCode);
         }
+      });
+      response.on('data', (data) => {
+        const contentLength = Number(response.headers['content-length']);
+        downloadedSize += data.length;
+        const progress = String(Math.round((downloadedSize / contentLength) * 100)).padStart(3, ' ');
+        cursorTo(process.stdout, 0);
+        process.stdout.write(`downloading: ${progress} % (${downloadedSize} Bytes)`.padEnd(50, ' '));
       });
       response.on('error', async (err) => {
         await unlink(tmpDest);
@@ -86,55 +108,3 @@ Utils.unzip = (zipfile: string): Promise<string> => {
       });
   });
 };
-
-const prefs : {[prefName: string]: string} = {
-  '01_hokkaido': '北海道',
-  '02_aomori': '青森県',
-  '03_iwate': '岩手県',
-  '04_miyagi': '宮城県',
-  '05_akita': '秋田県',
-  '06_yamagata': '山形県',
-  '07_fukushima': '福島県',
-  '08_ibaragi': '茨城県',
-  '09_tochigi': '栃木県',
-  '10_gunma': '群馬県',
-  '11_saitama': '埼玉県',
-  '12_chiba': '千葉県',
-  '13_tokyo': '東京都',
-  '14_kanagawa': '神奈川県',
-  '15_niigata': '新潟県',
-  '16_toyama': '富山県',
-  '17_ishikawa': '石川県',
-  '18_fukui': '福井県',
-  '19_yamagata': '山梨県',
-  '20_nagano': '長野県',
-  '21_gifu': '岐阜県',
-  '22_shizuoka': '静岡県',
-  '23_aichi': '愛知県',
-  '24_mie': '三重県',
-  '25_shiga': '滋賀県',
-  '26_kyoto': '京都府',
-  '27_osaka': '大阪府',
-  '28_hyogo': '兵庫県',
-  '29_nara': '奈良県',
-  '30_wakayama': '和歌山県',
-  '31_tottori': '鳥取県',
-  '32_shimane': '島根県',
-  '33_okayama': '岡山県',
-  '34_hiroshima': '広島県',
-  '35_yamaguchi': '山口県',
-  '36_tokushima': '徳島県',
-  '37_kagawa': '香川県',
-  '38_ehime': '愛媛県',
-  '39_kochi': '高知県',
-  '40_fukuoka': '福岡県',
-  '41_saga': '佐賀県',
-  '42_nagasaki': '長崎県',
-  '43_kumamoto': '熊本県',
-  '44_oita': '大分県',
-  '45_miyazaki': '宮崎県',
-  '46_kagoshima': '鹿児島県',
-  '47_okinawa': '沖縄県',
-};
-
-Utils.prefs = prefs;

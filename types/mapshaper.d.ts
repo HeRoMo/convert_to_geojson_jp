@@ -2,11 +2,13 @@
 type ErrCallback = (error: Error) => void;
 type Callback = (error: Error, data: {[filename: string]: string}) => void;
 
+type MapShaperInput = { [fileName: string]: string }
+
 declare module 'mapshaper' {
   export function runCommands(
     commands: string,
-    input: any,
-    callback: ErrCallback,
+    input: MapShaperInput,
+    callback?: ErrCallback,
   ): void;
 
   export function runCommands(
@@ -20,8 +22,8 @@ declare module 'mapshaper' {
 
   export function applyCommands(
     commands: string,
-    input: any,
-    callback: Callback,
+    input: MapShaperInput,
+    callback?: Callback,
   ): void;
 
   export function applyCommands(
