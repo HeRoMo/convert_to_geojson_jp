@@ -42,5 +42,5 @@ Every feature of geojson/topojson data has the following properties.
 |code6| code5 with check digit|
 
 ## License
-The license of this script is ISC.
+The license of the scripts in this repository is ISC.
 But you have to follow the [terms of use for National Land numerical information](https://nlftp.mlit.go.jp/ksj/other/agreement.html) about converted data.

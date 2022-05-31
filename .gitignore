@@ -2,8 +2,10 @@
 
 node_modules
 src_data/*
-
-
 lesson.js
 
+test/fixtures/shape_files
+coverage
+
 dest
+tmp
