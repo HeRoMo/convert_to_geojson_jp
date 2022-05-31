@@ -4035,7 +4035,7 @@ iconv-lite@0.4.24:
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
 
-iconv-lite@0.6:
+iconv-lite@0.6, iconv-lite@^0.6.3:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.6.3.tgz#a52f80bf38da1952eb5c681790719871a1a72501"
   integrity sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==
@@ -4932,10 +4932,10 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
-mapshaper@^0.5.118:
-  version "0.5.118"
-  resolved "https://registry.yarnpkg.com/mapshaper/-/mapshaper-0.5.118.tgz#380b9240d0ca05e9bf133652a942158e8e64eea1"
-  integrity sha512-qNHHLK3pyUK3r9KCQ4aGWao1p3R6LhdnDFY9XvgKquw5ml/n1498bekxgaUkD1bkDimaitodobWwg4JW7Uu6LA==
+mapshaper@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/mapshaper/-/mapshaper-0.6.2.tgz#224cbb106eb6776bc71027e5d1037c37c90facf7"
+  integrity sha512-rxo9Lgw4T4va56GfBckce/7x+l7dQA2ZYyv9ERR6kxsmW4lvh+qR/wU7oi8aq6lQ8lKmKoih73AiUNczRAS5DA==
   dependencies:
     "@tmcw/togeojson" "^4.7.0"
     "@xmldom/xmldom" "^0.8.2"
@@ -4946,7 +4946,7 @@ mapshaper@^0.5.118:
     delaunator "^5.0.0"
     flatbush "^3.2.1"
     geokdbush "^1.1.0"
-    iconv-lite "0.4.24"
+    iconv-lite "^0.6.3"
     kdbush "^3.0.0"
     mproj "0.0.35"
     opn "^5.3.0"
