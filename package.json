@@ -28,7 +28,7 @@
   "author": "HeRoMo",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "7.21.5",
+    "@babel/core": "7.21.8",
     "@babel/preset-env": "7.21.5",
     "@types/jest": "29.5.1",
     "@types/unzipper": "0.10.5",
