@@ -28,8 +28,8 @@
   "author": "HeRoMo",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "7.22.9",
-    "@babel/preset-env": "7.22.9",
+    "@babel/core": "7.22.10",
+    "@babel/preset-env": "7.22.10",
     "@types/jest": "29.5.3",
     "@types/unzipper": "0.10.6",
     "@typescript-eslint/eslint-plugin": "6.2.1",
