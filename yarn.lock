@@ -8104,9 +8104,9 @@ unpipe@1.0.0, unpipe@~1.0.0:
   integrity sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==
 
 unzipper@^0.11.0:
-  version "0.11.4"
-  resolved "https://registry.yarnpkg.com/unzipper/-/unzipper-0.11.4.tgz#cc15fb4efae1846e4dce4fcdb29855a87a52993c"
-  integrity sha512-T6CZQdmCMhlpHM+x4E5E9pIYCXH5INcrI8Cowr4tLQIciuw5nnp+X/LEwgeuFnay3vp9hVo4ydPw3WYSg2agWQ==
+  version "0.11.6"
+  resolved "https://registry.yarnpkg.com/unzipper/-/unzipper-0.11.6.tgz#05b9954320ab30c9398b1638db791c112f919075"
+  integrity sha512-anERl79akvqLbAxfjIFe4hK0wsi0fH4uGLwNEl4QEnG+KKs3QQeApYgOS/f6vH2EdACUlZg35psmd/3xL2duFQ==
   dependencies:
     big-integer "^1.6.17"
     bluebird "~3.4.1"
