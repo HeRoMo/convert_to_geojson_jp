@@ -40,7 +40,7 @@
     "eslint": "9.18.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.31.0",
-    "eslint-plugin-jest": "28.10.0",
+    "eslint-plugin-jest": "28.11.0",
     "file-loader": "6.2.0",
     "html-loader": "5.1.0",
     "html-webpack-plugin": "5.6.3",
