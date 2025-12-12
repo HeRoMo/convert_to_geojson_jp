@@ -20,7 +20,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('./test/fixture_config.ts') }}-fixtures_shape_files
       - run: yarn test
       - name: Upload test coverage artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: jest-coverage
           path: coverage
