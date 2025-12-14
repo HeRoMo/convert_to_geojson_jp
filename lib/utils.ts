@@ -80,12 +80,12 @@ Utils.code5to6 = (code5: string) => {
  * @param zipfile 解凍するzipファイル
  * @return shape ファイルのファイルパスを引数に渡したPromise
  */
-Utils.unzip = (zipfile: string): Promise<string> => {
+Utils.unzip = (zipfile: string, pattern: RegExp): Promise<string[]> => {
   const outputDir = path.dirname(zipfile);
-  let shpFile = `${outputDir}/`;
+  const shpFiles: string[] = [];
   return new Promise((resolve) => {
     fs.createReadStream(zipfile)
-      .on('end', () => resolve(shpFile))
+      .on('end', () => resolve(shpFiles))
       .pipe(unzip.Parse())
       .on('entry', (entry) => {
         const { path: fileName, type } = entry; // type is 'Directory' or 'File'
@@ -101,7 +101,7 @@ Utils.unzip = (zipfile: string): Promise<string> => {
             }
           }
           entry.pipe(fs.createWriteStream(`${outputDir}/${fileName}`));
-          if (path.extname(fileName) === '.shp') shpFile += fileName;
+          if (pattern.test(fileName)) shpFiles.push(`${outputDir}/${fileName}`);
         } else {
           entry.autodrain();
         }

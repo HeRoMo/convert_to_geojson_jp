@@ -6,7 +6,8 @@ import { url, srcFile } from './config';
 export async function convertToGeojson(srcArchive: string) {
   await Utils.download(url, srcFile);
 
-  const shpFile = await utils.unzip(srcArchive);
+  const shpFiles = await utils.unzip(srcArchive, /N03-\d{8}.shp/);
+  const shpFile = shpFiles[0];
   const JG = new JpShapeConverter(shpFile, './dest');
   await Promise.all([
     JG.japanDetailGeojson(shpFile),
