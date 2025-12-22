@@ -1,7 +1,7 @@
 import { JpShapeConverter } from '../lib';
 import { convertToGeojson } from './geojson';
 
-const srcFile = './src_data/N03-190101_GML.zip';
+const srcFile = './src_data/N03-20250101_GML.zip';
 (async () => {
   try {
     await convertToGeojson(srcFile);

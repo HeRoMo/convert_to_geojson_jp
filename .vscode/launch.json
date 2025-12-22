@@ -7,8 +7,36 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "geojson.js",
-            "program": "${workspaceFolder}/example/geojson.js"
-        }
+            "name": "geojson.ts",
+            "program": "${workspaceFolder}/example/geojson.ts",
+            "runtimeArgs": [
+                "--inspect",
+                "--require",
+                "ts-node/register"
+            ],
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "topojson.ts",
+            "program": "${workspaceFolder}/example/topojson.ts",
+            "runtimeArgs": [
+                "--inspect",
+                "--require",
+                "ts-node/register"
+            ],
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "jest",
+            "program": "${workspaceFolder}/node_modules/.bin/jest",
+            "args": [
+                "--runInBand",
+                // "test/lib/utils.test.ts"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+        },
     ]
 }
