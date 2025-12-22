@@ -25,7 +25,7 @@ let JG: JpShapeConverter;
 const destBaseDir = './test/tmp';
 beforeEach(async () => {
   const shpFiles = await utils.unzip(fixturePath, /N03-\d{8}_\d{2}.shp/);
-  shpFile = shpFiles[0];
+  [shpFile] = shpFiles;
   JG = new JpShapeConverter(shpFile, destBaseDir);
 });
 
