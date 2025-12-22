@@ -1,7 +1,7 @@
 import { unlink, writeFile } from 'fs/promises';
 import * as path from 'path';
 import * as mapshaper from 'mapshaper';
-import { FeatureCollection, Feature, Geometry } from 'geojson'; // eslint-disable-line import/no-unresolved
+import { FeatureCollection, Feature, Geometry } from 'geojson';
 
 import Utils from './utils';
 
@@ -60,7 +60,7 @@ const JpPrefs : {[prefName: string]: string} = {
 };
 
 export class JpShapeConverter {
-  // eslint-disable-next-line no-useless-constructor,no-unused-vars,no-empty-function
+  // eslint-disable-next-line no-unused-vars
   constructor(private readonly shapeFilePath: string, public readonly destBaseDir: string) {}
 
   /**
@@ -70,7 +70,6 @@ export class JpShapeConverter {
    * @param format       出力フォーマット
    * @return Promise object
    */
-  // eslint-disable-next-line class-methods-use-this
   private static async extractPref(
     inputGeojson: string,
     prefKey: string,
@@ -166,7 +165,6 @@ export class JpShapeConverter {
     // 属性値の調整
     features.forEach((feature) => {
       const props = feature.properties;
-      /* eslint-disable no-param-reassign */
       props.code6 = Utils.code5to6(props.code5);
       if (/.+市$/.test(props.name) && (props.ward && /.+区$/.test(props.ward))) { // 政令市の処理
         props.city = props.name;
@@ -179,7 +177,6 @@ export class JpShapeConverter {
       if (props.office.length === 0) { delete props.office; }
       if (props.county === '') { delete props.county; }
       if (props.ward === '') { delete props.ward; }
-      /* eslint-enable no-param-reassign */
     });
     const destDir = path.join(this.destBaseDir, 'geojson');
     return this.outputFile(destDir, outFile, geojson);
@@ -259,7 +256,7 @@ export class JpShapeConverter {
       await Promise.all(tmpfiles.map((elm) => unlink(elm))); // 中間ファイルの後始末
       return outputFilePath;
     } catch (err) {
-      console.error(err); // eslint-disable-line no-console
+      console.error(err);
       throw err;
     }
   }
@@ -304,11 +301,9 @@ export class JpShapeConverter {
     // 属性値の調整
     features.forEach((feature: JpFeature) => {
       const d = feature.properties;
-      /* eslint-disable no-param-reassign */
       d.code5 = `${d.code5.slice(0, 2)}000`;
       d.code6 = Utils.code5to6(d.code5);
       d.name = d.pref;
-      /* eslint-enable no-param-reassign */
     });
     const destDir = path.join(this.destBaseDir, 'geojson');
     return this.outputFile(destDir, outFile, geojson);

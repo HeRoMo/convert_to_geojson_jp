@@ -1,4 +1,4 @@
-import { JpShapeConverter, utils } from '../lib'; // eslint-disable-line import/no-import-module-exports
+import { JpShapeConverter, utils } from '../lib';
 import Utils from '../lib/utils';
 
 import { url, srcFile } from './config';

@@ -17,14 +17,14 @@ Original file format of Administrative Zones data is ESRI Shapefile. This script
 2. Copy the download file to `src_data` directory.
 3. run the command:
 ```
-> npm install
-> npm run geojson
+> yarn install
+> yarn run geojson
 ```
 4. generate geojson files in dest/geojson directory.
 
 ### Sample page
 You can see the map data localy.
-Command `npm start`, then your browser open http://localhost:3000.
+Command `yarn start`, then your browser open http://localhost:3000.
 
 ## Output geojson/topojson files
 

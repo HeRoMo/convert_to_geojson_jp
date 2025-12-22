@@ -65,7 +65,7 @@ const japanJson = './map-data/00_japan.topojson';
 const japanDetailJson = './map-data/00_japan_detail.topojson';
 const japanPrefsJson = './map-data/00_japan_prefs.topojson';
 
-async function showTopojson(jsonfile, styleFunc, onEachFeatureFunc) { // eslint-disable-line no-shadow, max-len
+async function showTopojson(jsonfile, styleFunc, onEachFeatureFunc) {
   const geoData = await d3.json(jsonfile);
 
   // leafletを使ってgeojsonレイヤーを表示する
