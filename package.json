@@ -16,7 +16,7 @@
     "d3": "^7.6.1",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jest": "^29.5.0",
-    "globals": "^16.5.0",
+    "globals": "^17.0.0",
     "leaflet": "^1.9.3",
     "mapshaper": "^0.6.7",
     "regenerator-runtime": "^0.14.0",
