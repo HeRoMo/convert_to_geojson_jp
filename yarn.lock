@@ -4187,19 +4187,12 @@ define-properties@^1.2.1:
     has-property-descriptors "^1.0.0"
     object-keys "^1.1.1"
 
-delaunator@5:
+delaunator@5, delaunator@^5.0.0:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/delaunator/-/delaunator-5.0.1.tgz#39032b08053923e924d6094fe2cde1a99cc51278"
   integrity sha512-8nvh+XBe96aCESrGOqMp/84b13H9cdKbG5P2ejQCh4d4sK9RL4371qou9drQjMhvnPmhWl5hnmqbEE0fXr9Xnw==
   dependencies:
     robust-predicates "^3.0.2"
-
-delaunator@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/delaunator/-/delaunator-5.0.0.tgz#60f052b28bd91c9b4566850ebf7756efe821d81b"
-  integrity sha512-AyLvtyJdbv/U1GkiS6gUUzclRoAY4Gs75qkMygJJhU75LW4DNuSF2RMzpxs9jw9Oz1BobHjTdkG3zdP55VxAqw==
-  dependencies:
-    robust-predicates "^3.0.0"
 
 delayed-stream@~1.0.0:
   version "1.0.0"
@@ -6734,10 +6727,10 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
-mapshaper@^0.6.7:
-  version "0.6.33"
-  resolved "https://registry.yarnpkg.com/mapshaper/-/mapshaper-0.6.33.tgz#32a0efb5d0eae1dba5edaa150ae0f31e5a389c75"
-  integrity sha512-NSqUFoUlE4eAc3h7Es6XsUUxhVJaYT2f0n2gAR9I2q7M4/vNKCOogyfYGrJiDl2OyPYPQ2My/BWKOHK6EziLGQ==
+mapshaper@^0.6.44:
+  version "0.6.44"
+  resolved "https://registry.yarnpkg.com/mapshaper/-/mapshaper-0.6.44.tgz#79d334ab89dbca72d57c12cd0500b842f4cdd9c5"
+  integrity sha512-dbwMPBZtY/v2xTg7lF92out77rYiX4zxBgf8F94sjBqsDvnXZvy8MAbxZuVcVWPU3wkuh7ffWitj2M/5xDU8mA==
   dependencies:
     "@placemarkio/tokml" "^0.3.3"
     "@tmcw/togeojson" "^5.6.0"
@@ -7720,7 +7713,7 @@ retry@^0.13.1:
   resolved "https://registry.yarnpkg.com/retry/-/retry-0.13.1.tgz#185b1587acf67919d63b357349e03537b2484658"
   integrity sha512-XQBQ3I8W1Cge0Seh+6gjj03LbmRFWuoszgK9ooCpwYIrhhoO80pfq4cUkU5DkknwfOfFteRwlZ56PYOGYyFWdg==
 
-robust-predicates@^3.0.0, robust-predicates@^3.0.2:
+robust-predicates@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/robust-predicates/-/robust-predicates-3.0.2.tgz#d5b28528c4824d20fc48df1928d41d9efa1ad771"
   integrity sha512-IXgzBWvWQwE6PrDI05OvmXUIruQTcoMDzRsOd5CDvHCVLcLHMTSYvOK5Cm46kWqlV3yAbuSpBZdJ5oP5OUoStg==
