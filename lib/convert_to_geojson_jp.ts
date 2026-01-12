@@ -126,8 +126,8 @@ export class JpShapeConverter {
   private async margeWard(inputFile: string, outputFilePath: string): Promise<string> {
     let commands = '';
     commands += ` -i ${inputFile}`;
-    commands += ' -dissolve2 N03_003 copy-fields=N03_001,N03_002,N03_004,N03_007';
-    commands += " -each 'N03_004=N03_003;N03_007=(\"0\"+(Math.floor(N03_007/10)*10)).slice(-5)'";
+    commands += ' -dissolve2 N03_004 copy-fields=N03_001,N03_002,N03_003,N03_005,N03_007';
+    commands += " -each 'N03_007=(\"0\"+(Math.floor(N03_007/10)*10)).slice(-5)'";
     commands += ' -simplify 0.4%';
     commands += ` -o format=geojson ${outputFilePath} force`;
     await mapshaper.runCommands(commands);
@@ -166,17 +166,17 @@ export class JpShapeConverter {
     features.forEach((feature) => {
       const props = feature.properties;
       props.code6 = Utils.code5to6(props.code5);
-      if (/.+市$/.test(props.county)) { // 政令市の処理
-        props.city = props.county;
-        delete props.county;
-        if (props.city === props.name) { delete props.city; }
-      } else if (/.+区$/.test(props.county)) { // 特別区の処理
-        props.name = props.county;
-        delete props.county;
+      if (/.+市$/.test(props.name) && (props.ward && /.+区$/.test(props.ward))) { // 政令市の処理
+        props.city = props.name;
+        props.name = props.ward;
+        delete props.ward;
+      } else if (/.+区$/.test(props.name) && !props.ward) { // 特別区の処理
+        delete props.ward;
       }
       // 不要空属性の削除
       if (props.office.length === 0) { delete props.office; }
       if (props.county === '') { delete props.county; }
+      if (props.ward === '') { delete props.ward; }
     });
     const destDir = path.join(this.destBaseDir, 'geojson');
     return this.outputFile(destDir, outFile, geojson);
@@ -192,8 +192,8 @@ export class JpShapeConverter {
   private async exceptBigCity(inputFile: string, outputFilePath: string): Promise<string> {
     let commands = '';
     commands += ` -i ${inputFile}`;
-    commands += ' -dissolve N03_007 copy-fields=N03_001,N03_002,N03_003,N03_004';
-    commands += " -filter '!/.+市$/.test(N03_003)'";
+    commands += ' -dissolve N03_007 copy-fields=N03_001,N03_002,N03_003,N03_004,N03_005';
+    commands += " -filter '!((/.+市$/.test(N03_004) && /.+区$/.test(N03_005)) || /^所属未定地$/.test(N03_004))'";
     commands += ' -simplify 0.4%';
     commands += ` -o format=geojson ${outputFilePath}`;
     await mapshaper.runCommands(commands);
@@ -210,8 +210,8 @@ export class JpShapeConverter {
     const tmpfile = 'bigcities_tmp.geojson';
     let commands = '';
     commands += ` -i ${inputFile}`;
-    commands += ' -dissolve N03_007 copy-fields=N03_001,N03_002,N03_003,N03_004';
-    commands += " -filter '/.+市$/.test(N03_003)'";
+    commands += ' -dissolve N03_007 copy-fields=N03_001,N03_002,N03_003,N03_004,N03_005';
+    commands += " -filter '/.+市$/.test(N03_004) && /.+区$/.test(N03_005)'";
     commands += ` -o format=geojson ${tmpfile} force`;
 
     await mapshaper.runCommands(commands);
@@ -233,6 +233,7 @@ export class JpShapeConverter {
     commands += ' -merge-layers';
     commands += ' -rename-layers japan';
     commands += ' -rename-fields pref=N03_001,office=N03_002,county=N03_003,name=N03_004,code5=N03_007';
+    commands += ' -filter-fields pref,office,county,name,code5';
     commands += ' -o format=geojson tmp.geojson';
     const output = await mapshaper.applyCommands(commands);
     const geojson = JSON.parse(output['tmp.geojson']);
@@ -268,8 +269,9 @@ export class JpShapeConverter {
   async japanDetailGeojson(shpFile: string): Promise<string> {
     let commands = '';
     commands += ` -i ${shpFile}`;
-    commands += ' -dissolve N03_007 copy-fields=N03_001,N03_002,N03_003,N03_004';
-    commands += ' -rename-fields pref=N03_001,office=N03_002,county=N03_003,name=N03_004,code5=N03_007';
+    commands += ' -dissolve N03_007 copy-fields=N03_001,N03_002,N03_003,N03_004,N03_005';
+    commands += " -filter '!/^所属未定地$/.test(N03_004)'";
+    commands += ' -rename-fields pref=N03_001,office=N03_002,county=N03_003,name=N03_004,ward=N03_005,code5=N03_007';
     commands += ' -simplify 0.4%';
     commands += ' -rename-layers japan';
     commands += ' -o format=geojson tmp.geojson';
