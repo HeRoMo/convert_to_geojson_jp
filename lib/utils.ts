@@ -78,7 +78,8 @@ Utils.code5to6 = (code5: string) => {
 /**
  * データ・ソースアーカイブを解凍する
  * @param zipfile 解凍するzipファイル
- * @return shape ファイルのファイルパスを引数に渡したPromise
+ * @param pattern 抽出するファイル名のパターン
+ * @return shape ファイルのファイルパス配列を引数に渡したPromise
  */
 Utils.unzip = (zipfile: string, pattern: RegExp): Promise<string[]> => {
   const outputDir = path.dirname(zipfile);
