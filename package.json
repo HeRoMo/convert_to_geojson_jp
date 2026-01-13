@@ -18,7 +18,7 @@
     "eslint-plugin-jest": "^29.5.0",
     "globals": "^17.0.0",
     "leaflet": "^1.9.3",
-    "mapshaper": "^0.6.7",
+    "mapshaper": "^0.6.44",
     "regenerator-runtime": "^0.14.0",
     "topojson": "^3.0.2",
     "unzipper": "^0.12.0"
