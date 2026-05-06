@@ -40,7 +40,7 @@
     "@babel/preset-env": "7.29.5",
     "@types/jest": "29.5.14",
     "@types/unzipper": "0.10.11",
-    "babel-loader": "10.0.0",
+    "babel-loader": "10.1.1",
     "copy-webpack-plugin": "13.0.1",
     "css-loader": "7.1.4",
     "eslint": "9.39.4",
